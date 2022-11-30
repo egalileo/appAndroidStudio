@@ -3,6 +3,7 @@ package com.example.aksconverter;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.TextView;
@@ -16,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
     public EditText editTextY;
     public EditText editTextZ;
     public TextView txtResultado;
-    public RadioButton btnOpcion;
+    public View view;
 
 
     @Override
@@ -34,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void convertirACartesiana(){
+    public void convertirACartesiana(View view){
         double n, x, y, z, p, angulo, lat, lon, elevacion;
         double ex1 = ( Math.pow(a,2) - Math.pow(b,2) ) / Math.pow(a, 2);
         double ex2 = ( Math.pow(a,2) - Math.pow(b,2) ) / Math.pow(b, 2);
@@ -54,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void convertirAGeodesica(){
+    public void convertirAGeodesica(View view){
         double n, x, y, z, p, angulo, lat, lon, elevacion;
         double ex1 = ( Math.pow(a,2) - Math.pow(b,2) ) / Math.pow(a, 2);
         double ex2 = ( Math.pow(a,2) - Math.pow(b,2) ) / Math.pow(b, 2);
