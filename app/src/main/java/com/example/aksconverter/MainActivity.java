@@ -30,50 +30,72 @@ public class MainActivity extends AppCompatActivity {
         editTextZ = findViewById(R.id.inputZ);
         txtResultado =findViewById(R.id.txtResultado);
 
-
-
-
     }
 
     public void convertirACartesiana(View view){
-        double n, x, y, z, p, angulo, lat, lon, elevacion;
+        double n, x, y, z, lat, lon, elv, latRad, lonRad;
         double ex1 = ( Math.pow(a,2) - Math.pow(b,2) ) / Math.pow(a, 2);
-        double ex2 = ( Math.pow(a,2) - Math.pow(b,2) ) / Math.pow(b, 2);
-        String salida = "";
+        String salida = "", lonStr, latStr, elStr;
 
-        lon = Double.parseDouble(editTextX.getText().toString());
-        lat = Double.parseDouble(editTextY.getText().toString());
-        elevacion = Double.parseDouble(editTextZ.getText().toString());
+        lonStr = editTextX.getText().toString();
+        latStr = editTextY.getText().toString();
+        elStr  = editTextZ.getText().toString();
 
-        n = (this.a) / ( ( 1 - Math.sqrt( 1 - ( (ex1) * (Math.pow(Math.sin(lat),2))))));
-        x = (n + elevacion) * (Math.cos(lat)) * (Math.cos(lon));
-        y = (n + elevacion)* (Math.cos(lat)) * (Math.sin(lon));
-        z = (((n)*( (Math.pow(b, 2))/ (Math.pow(a, 2)))) + elevacion) * (Math.sin(lat));
+        if( lonStr.isEmpty() || latStr.isEmpty() || elStr.isEmpty()){
+            salida = "*** Error ***\n  uno o más campos carece(n) de Datos";
+            txtResultado.setText(salida);
+        }else{
 
-        salida = "El Resultado es: \n x: "+x+"\ny: "+y+"\nz: "+z;
-        txtResultado.setText(salida);
+            lon = Double.parseDouble(lonStr);
+            lat = Double.parseDouble(latStr);
+            elv = Double.parseDouble(elStr);
 
+            if(elv>0 && elv<1000000000){
+                latRad = lat*(Math.PI/180.0);
+                lonRad = lon*(Math.PI/180.0);
+                n = (this.a) / ( ( 1 - Math.sqrt( 1 - ( (ex1) * (Math.pow(Math.sin(latRad),2))))));
+                x = (n + elv) * (Math.cos(latRad)) * (Math.cos(lonRad));
+                y = (n + elv)* (Math.cos(latRad)) * (Math.sin(lonRad));
+                z = (((n)*( (Math.pow(b, 2))/ (Math.pow(a, 2)))) + elv) * (Math.sin(latRad));
+
+                salida = "El Resultado es: \n x: "+(String.format("%.3f", x))+"\ny: "+(String.format("%.3f", y))+"\nz: "+(String.format("%.3f", z));
+                txtResultado.setText(salida);
+            }else{
+                salida = "Error. el rango de elevación esta fuera del establecido ()";
+                txtResultado.setText(salida);
+            }
+        }
     }
 
     public void convertirAGeodesica(View view){
-        double n, x, y, z, p, angulo, lat, lon, elevacion;
+        double n, x, y, z, p, angulo, lat, lon, elevacion, latRad;
         double ex1 = ( Math.pow(a,2) - Math.pow(b,2) ) / Math.pow(a, 2);
         double ex2 = ( Math.pow(a,2) - Math.pow(b,2) ) / Math.pow(b, 2);
-        String salida = "";
+        String salida = "", xStr, yStr, zStr;
 
-        x = Double.parseDouble(editTextX.getText().toString());
-        y = Double.parseDouble(editTextY.getText().toString());
-        z = Double.parseDouble(editTextZ.getText().toString());
+        xStr = editTextX.getText().toString();
+        yStr = editTextY.getText().toString();
+        zStr  = editTextZ.getText().toString();
 
-        p = Math.sqrt( (Math.pow(x,2)) + (Math.pow(y,2)) );
-        angulo = Math.atan( (z * this.a) / (p * this.b));
-        lat = ( Math.atan( (z + ( (ex2)*(this.b)*(Math.pow( Math.sin(angulo),3))))/
-                (p + ( (ex1)*(this.a)*(Math.pow(Math.cos(angulo),3)))))) * (180 / Math.PI);
-        lon = (Math.atan(y/x))*(180/Math.PI);
-        n = (this.a) / (Math.sqrt( 1 - ((ex1) * (Math.pow(Math.sin(lat),2)))));
-        elevacion = (p / Math.cos(lat)) - n;
+        if( xStr.isEmpty() || yStr.isEmpty() || zStr.isEmpty()){
+            salida = "*** Error ***\n Uno o más campos carece(n) de Datos";
+            txtResultado.setText(salida);
+        }else {
+            x = Double.parseDouble(xStr);
+            y = Double.parseDouble(yStr);
+            z = Double.parseDouble(zStr);
 
-        salida = "El Resultado es: \n latitude: "+lat+"\nlongitude: "+lon+"\nelevación: "+elevacion;
-        txtResultado.setText(salida);
+            p = Math.sqrt((Math.pow(x, 2)) + (Math.pow(y, 2)));
+            angulo = Math.atan((z * this.a) / (p * this.b));
+            lat = (Math.atan((z + ((ex2) * (this.b) * (Math.pow(Math.sin(angulo), 3)))) /
+                    (p + ((ex1) * (this.a) * (Math.pow(Math.cos(angulo), 3)))))) * (180 / Math.PI);
+            latRad = lat * (Math.PI / 180.0);
+            lon = (Math.atan(y / x)) * (180 / Math.PI);
+            n = (this.a) / (Math.sqrt(1 - ((ex1) * (Math.pow(Math.sin(latRad), 2)))));
+            elevacion = (p / Math.cos(latRad)) - n;
+
+            salida = "El Resultado es: \n latitude: " + (String.format("%.3f", lat)) + "\nlongitude: " + (String.format("%.3f", lon)) + "\nelevación: " + (String.format("%.3f", elevacion));
+            txtResultado.setText(salida);
+        }
     }
 }

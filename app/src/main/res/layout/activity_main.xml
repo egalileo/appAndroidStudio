@@ -5,12 +5,16 @@
     android:id="@+id/btnCart"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#A8DADC"
+    android:backgroundTint="#2A9D8F"
     tools:context=".MainActivity">
 
     <LinearLayout
         android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="#F1FAEE"
+        android:backgroundTint="#f1faee"
         android:gravity="center"
         android:orientation="vertical"
         tools:layout_editor_absoluteX="-106dp"
@@ -20,60 +24,81 @@
             android:id="@+id/lblX"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins"
             android:text="Ingrese &quot;x&quot; o &quot;Longitud&quot;" />
 
         <EditText
             android:id="@+id/inputX"
-            android:layout_width="wrap_content"
+            android:layout_width="295dp"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="numberDecimal" />
+            android:fontFamily="@font/poppins"
+            android:inputType="number|text|numberDecimal"
+            android:textColorHighlight="#457b9d"
+            android:textColorLink="#457b9d" />
 
         <TextView
             android:id="@+id/lblY"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins"
             android:text="Ingrese &quot;y&quot; o &quot;Latitud&quot;" />
 
         <EditText
             android:id="@+id/inputY"
-            android:layout_width="wrap_content"
+            android:layout_width="293dp"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="numberDecimal" />
+            android:fontFamily="@font/poppins"
+            android:inputType="text|numberDecimal" />
 
         <TextView
             android:id="@+id/txtZ"
             android:layout_width="213dp"
             android:layout_height="wrap_content"
-            android:text="Ingrese &quot;z&quot; o &quot;Elevación[" />
+            android:fontFamily="@font/poppins"
+            android:gravity="center"
+            android:text="Ingrese &quot;z&quot; o &quot;Elevación" />
 
         <EditText
             android:id="@+id/inputZ"
-            android:layout_width="wrap_content"
+            android:layout_width="295dp"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="numberDecimal" />
+            android:fontFamily="@font/poppins"
+            android:inputType="text|numberDecimal" />
 
         <Button
             android:id="@+id/btn1"
             android:layout_width="310dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="48dp"
+            android:backgroundTint="#1D3557"
             android:onClick="convertirACartesiana"
-            android:text="Geodesicas -> Cartesianas" />
+            android:text="Geodesicas -> Cartesianas"
+            app:strokeColor="#1D3557" />
 
         <Button
             android:id="@+id/btn2"
             android:layout_width="311dp"
             android:layout_height="wrap_content"
+            android:backgroundTint="#1D3557"
             android:onClick="convertirAGeodesica"
             android:text="CARTESIANAS -> GEODESICAS" />
 
         <TextView
-            android:id="@+id/txtResultado"
+            android:id="@+id/textView"
             android:layout_width="match_parent"
-            android:layout_height="90dp" />
+            android:layout_height="64dp" />
+
+        <TextView
+            android:id="@+id/txtResultado"
+            android:layout_width="348dp"
+            android:layout_height="145dp"
+            android:layout_gravity="bottom|center_horizontal|fill_vertical"
+            android:backgroundTint="#A8DADC"
+            android:gravity="center_horizontal"
+            android:textSize="20sp" />
 
     </LinearLayout>
 
