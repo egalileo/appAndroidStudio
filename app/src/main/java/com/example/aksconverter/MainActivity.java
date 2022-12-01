@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
             elv = Double.parseDouble(elStr);
 
 
-            if(elv>0){
+            //if(elv>0){
 
                 latRad = lat*(Math.PI/180);
                 lonRad = lon*(Math.PI/180);
@@ -65,10 +65,10 @@ public class MainActivity extends AppCompatActivity {
 
                 salida = "El Resultado es: \n x: "+(String.format("%.3f", x))+"\ny: "+(String.format("%.3f", y))+"\nz: "+(String.format("%.3f", z));
                 txtResultado.setText(salida);
-            }else{
-               salida = "Error. el rango de elevación esta fuera del establecido (Mayor que cero)";
-               txtResultado.setText(salida);
-            }
+            //}else{
+            //   salida = "Error. el rango de elevación esta fuera del establecido (Mayor que cero)";
+            //   txtResultado.setText(salida);
+            //}
         }
     }
 
