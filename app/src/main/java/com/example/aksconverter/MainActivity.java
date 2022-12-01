@@ -13,6 +13,7 @@ import java.lang.Math.*;
 public class MainActivity extends AppCompatActivity {
     public double a = 6378137.000;
     public double b = 6356752.314;
+    public double n ;
     public EditText editTextX;
     public EditText editTextY;
     public EditText editTextZ;
@@ -41,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
         latStr = editTextY.getText().toString();
         elStr  = editTextZ.getText().toString();
 
+
         if( lonStr.isEmpty() || latStr.isEmpty() || elStr.isEmpty()){
             salida = "*** Error ***\n  uno o más campos carece(n) de Datos";
             txtResultado.setText(salida);
@@ -50,21 +52,23 @@ public class MainActivity extends AppCompatActivity {
             lat = Double.parseDouble(latStr);
             elv = Double.parseDouble(elStr);
 
-            //if(elv>0 && elv<1000000000){
+
+            if(elv>0){
+
                 latRad = lat*(Math.PI/180);
                 lonRad = lon*(Math.PI/180);
+                this.n = (this.a) / (Math.sqrt(1 - ((ex1) * (Math.pow(Math.sin(latRad), 2)))));
 
-                n = (this.a) /  ( Math.sqrt( 1 - ( (ex1) * (Math.pow(Math.sin(latRad),2)) )));
-                x = (n + elv) * (Math.cos(latRad)) * (Math.cos(lonRad));
-                y = (n + elv)* (Math.cos(latRad)) * (Math.sin(lonRad));
-                z = (((n)*( (Math.pow(b, 2))/ (Math.pow(a, 2)))) + elv) * (Math.sin(latRad));
+                x = (this.n + elv) * Math.cos(latRad) * Math.cos(lonRad);
+                y = (this.n + elv) * Math.cos(latRad) * Math.sin(lonRad);
+                z = ((this.n * (Math.pow(b,2)/Math.pow(a,2))) + elv) * Math.sin(latRad);
 
                 salida = "El Resultado es: \n x: "+(String.format("%.3f", x))+"\ny: "+(String.format("%.3f", y))+"\nz: "+(String.format("%.3f", z));
                 txtResultado.setText(salida);
-            //}else{
-           //     salida = "Error. el rango de elevación esta fuera del establecido ()";
-           //     txtResultado.setText(salida);
-           // }
+            }else{
+               salida = "Error. el rango de elevación esta fuera del establecido (Mayor que cero)";
+               txtResultado.setText(salida);
+            }
         }
     }
 
@@ -89,11 +93,11 @@ public class MainActivity extends AppCompatActivity {
             p = Math.sqrt((Math.pow(x, 2)) + (Math.pow(y, 2)));
             angulo = Math.atan((z * this.a) / (p * this.b));
             lat = (Math.atan((z + ((ex2) * (this.b) * (Math.pow(Math.sin(angulo), 3)))) /
-                    (p + ((ex1) * (this.a) * (Math.pow(Math.cos(angulo), 3)))))) * (180 / Math.PI);
+                    (p - ((ex1) * (this.a) * (Math.pow(Math.cos(angulo), 3)))))) * (180 / Math.PI);
             latRad = lat * (Math.PI / 180.0);
             lon = (Math.atan(y / x)) * (180 / Math.PI);
-            n = (this.a) / (Math.sqrt(1 - ((ex1) * (Math.pow(Math.sin(latRad), 2)))));
-            elevacion = (p / Math.cos(latRad)) - n;
+            this.n = (this.a) / (Math.sqrt(1 - ((ex1) * (Math.pow(Math.sin(latRad), 2)))));
+            elevacion = (p / Math.cos(latRad)) - this.n;
 
             salida = "El Resultado es: \n latitude: " + (String.format("%.3f", lat)) + "\nlongitude: " + (String.format("%.3f", lon)) + "\nelevación: " + (String.format("%.3f", elevacion));
             txtResultado.setText(salida);
