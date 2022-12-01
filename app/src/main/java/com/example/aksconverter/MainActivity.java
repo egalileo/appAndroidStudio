@@ -50,20 +50,21 @@ public class MainActivity extends AppCompatActivity {
             lat = Double.parseDouble(latStr);
             elv = Double.parseDouble(elStr);
 
-            if(elv>0 && elv<1000000000){
-                latRad = lat*(Math.PI/180.0);
-                lonRad = lon*(Math.PI/180.0);
-                n = (this.a) / ( ( 1 - Math.sqrt( 1 - ( (ex1) * (Math.pow(Math.sin(latRad),2))))));
+            //if(elv>0 && elv<1000000000){
+                latRad = lat*(Math.PI/180);
+                lonRad = lon*(Math.PI/180);
+
+                n = (this.a) /  ( Math.sqrt( 1 - ( (ex1) * (Math.pow(Math.sin(latRad),2)) )));
                 x = (n + elv) * (Math.cos(latRad)) * (Math.cos(lonRad));
                 y = (n + elv)* (Math.cos(latRad)) * (Math.sin(lonRad));
                 z = (((n)*( (Math.pow(b, 2))/ (Math.pow(a, 2)))) + elv) * (Math.sin(latRad));
 
                 salida = "El Resultado es: \n x: "+(String.format("%.3f", x))+"\ny: "+(String.format("%.3f", y))+"\nz: "+(String.format("%.3f", z));
                 txtResultado.setText(salida);
-            }else{
-                salida = "Error. el rango de elevación esta fuera del establecido ()";
-                txtResultado.setText(salida);
-            }
+            //}else{
+           //     salida = "Error. el rango de elevación esta fuera del establecido ()";
+           //     txtResultado.setText(salida);
+           // }
         }
     }
 
