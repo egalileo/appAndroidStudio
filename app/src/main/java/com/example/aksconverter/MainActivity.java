@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
                 y = (this.n + elv) * Math.cos(latRad) * Math.sin(lonRad);
                 z = ((this.n * (Math.pow(b,2)/Math.pow(a,2))) + elv) * Math.sin(latRad);
 
-                salida = "El Resultado es: \n x: "+(String.format("%.3f", x))+"\ny: "+(String.format("%.3f", y))+"\nz: "+(String.format("%.3f", z));
+                salida = "Coordenadas Cartesianas: \n x: "+(String.format("%.3f", x))+"\ny: "+(String.format("%.3f", y))+"\nz: "+(String.format("%.3f", z));
                 txtResultado.setText(salida);
             //}else{
             //   salida = "Error. el rango de elevación esta fuera del establecido (Mayor que cero)";
@@ -99,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
             this.n = (this.a) / (Math.sqrt(1 - ((ex1) * (Math.pow(Math.sin(latRad), 2)))));
             elevacion = (p / Math.cos(latRad)) - this.n;
 
-            salida = "El Resultado es: \n latitude: " + (String.format("%.3f", lat)) + "\nlongitude: " + (String.format("%.3f", lon)) + "\nelevación: " + (String.format("%.3f", elevacion));
+            salida = "Coordenadas Geodesicas: \n latitude: " + (String.format("%.3f", lat)) + "\nlongitude: " + (String.format("%.3f", lon)) + "\nelevación: " + (String.format("%.3f", elevacion));
             txtResultado.setText(salida);
         }
     }

@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#F1FAEE"
-        android:backgroundTint="#f1faee"
+        android:backgroundTint="#ccdbdc"
         android:gravity="center"
         android:orientation="vertical"
         tools:layout_editor_absoluteX="-106dp"
@@ -58,7 +58,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins"
             android:gravity="center"
-            android:text="Ingrese &quot;z&quot; o &quot;Elevación" />
+            android:text="Ingrese &quot;z&quot; o &quot;Altura elipsoidal&quot;" />
 
         <EditText
             android:id="@+id/inputZ"
@@ -73,7 +73,7 @@
             android:layout_width="310dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="48dp"
-            android:backgroundTint="#1D3557"
+            android:backgroundTint="#0a1128"
             android:onClick="convertirACartesiana"
             android:text="Geodesicas -> Cartesianas"
             app:strokeColor="#1D3557" />
@@ -82,7 +82,7 @@
             android:id="@+id/btn2"
             android:layout_width="311dp"
             android:layout_height="wrap_content"
-            android:backgroundTint="#1D3557"
+            android:backgroundTint="#0a1128"
             android:onClick="convertirAGeodesica"
             android:text="CARTESIANAS -> GEODESICAS" />
 
@@ -94,7 +94,7 @@
         <TextView
             android:id="@+id/txtResultado"
             android:layout_width="348dp"
-            android:layout_height="145dp"
+            android:layout_height="139dp"
             android:layout_gravity="bottom|center_horizontal|fill_vertical"
             android:backgroundTint="#A8DADC"
             android:gravity="center_horizontal"
